@@ -1,4 +1,4 @@
-import { Formik, Form, Field, ErrorMessage, type FormikHelpers } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createNote, type CreateNotePayload } from '../../services/noteService';
@@ -53,12 +53,8 @@ const NoteForm: React.FC<NoteFormProps> = ({ onCancel }) => {
     },
   });
 
-  const handleSubmit = (
-    values: CreateNotePayload,
-    { setSubmitting }: FormikHelpers<CreateNotePayload>
-  ) => {
+  const handleSubmit = (values: CreateNotePayload) => {
     createNoteMutation.mutate(values);
-    setSubmitting(false);
   };
 
   const isSubmitting = createNoteMutation.isPending;
